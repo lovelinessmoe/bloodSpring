@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -71,12 +72,14 @@ public class Blood implements Serializable {
      */
     @TableField(value = "take_time")
     @ApiModelProperty(value = "采血日期")
+    @JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd HH:mm:ss")
     private Date takeTime;
     /**
      * 过期日期
      */
     @TableField(value = "expire_time")
     @ApiModelProperty(value = "过期日期")
+    @JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd HH:mm:ss")
     private Date expireTime;
     /**
      * 血型BLOOD_GROUP(abo)
