@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="vip.ashes.blood.dao.TransBloodsMapper">
+  <resultMap id="BaseResultMap" type="vip.ashes.blood.entity.TransBloods">
+    <!--@mbg.generated-->
+    <!--@Table blood.trans_bloods-->
+    <id column="trans_bloods_id" jdbcType="CHAR" property="transBloodsId" />
+    <id column="blood_id" jdbcType="CHAR" property="bloodId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    trans_bloods_id, blood_id
+  </sql>
+</mapper>

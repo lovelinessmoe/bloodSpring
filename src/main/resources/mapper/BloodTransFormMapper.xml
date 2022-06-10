@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="vip.ashes.blood.dao.BloodTransFormMapper">
+  <resultMap id="BaseResultMap" type="vip.ashes.blood.entity.BloodTransForm">
+    <!--@mbg.generated-->
+    <!--@Table blood.blood_trans_form-->
+    <id column="form_id" jdbcType="CHAR" property="formId" />
+    <result column="need_person" jdbcType="CHAR" property="needPerson" />
+    <result column="need_volume" jdbcType="INTEGER" property="needVolume" />
+    <result column="apply_user" jdbcType="CHAR" property="applyUser" />
+    <result column="apply_time" jdbcType="TIMESTAMP" property="applyTime" />
+    <result column="state" jdbcType="CHAR" property="state" />
+    <result column="blood_trans_succ_id" jdbcType="CHAR" property="bloodTransSuccId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    form_id, need_person, need_volume, apply_user, apply_time, `state`, blood_trans_succ_id
+  </sql>
+</mapper>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="vip.ashes.blood.dao.UserMapper">
+  <resultMap id="BaseResultMap" type="vip.ashes.blood.entity.User">
+    <!--@mbg.generated-->
+    <!--@Table blood.`user`-->
+    <id column="user_id" jdbcType="CHAR" property="userId" />
+    <result column="role_id" jdbcType="INTEGER" property="roleId" />
+    <result column="user_name" jdbcType="CHAR" property="userName" />
+    <result column="password" jdbcType="CHAR" property="password" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="real_name" jdbcType="CHAR" property="realName" />
+    <result column="sex" jdbcType="TINYINT" property="sex" />
+    <result column="age" jdbcType="INTEGER" property="age" />
+    <result column="blood_group" jdbcType="INTEGER" property="bloodGroup" />
+    <result column="rh" jdbcType="INTEGER" property="rh" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    user_id, role_id, user_name, `password`, email, real_name, sex, age, blood_group, 
+    rh
+  </sql>
+
+</mapper>

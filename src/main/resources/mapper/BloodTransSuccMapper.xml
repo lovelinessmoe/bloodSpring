@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="vip.ashes.blood.dao.BloodTransSuccMapper">
+  <resultMap id="BaseResultMap" type="vip.ashes.blood.entity.BloodTransSucc">
+    <!--@mbg.generated-->
+    <!--@Table blood.blood_trans_succ-->
+    <id column="blood_trans_succ_id" jdbcType="CHAR" property="bloodTransSuccId" />
+    <result column="user_id" jdbcType="CHAR" property="userId" />
+    <result column="trans_bloods_id" jdbcType="CHAR" property="transBloodsId" />
+    <result column="need_volume" jdbcType="INTEGER" property="needVolume" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    blood_trans_succ_id, user_id, trans_bloods_id, need_volume
+  </sql>
+</mapper>
