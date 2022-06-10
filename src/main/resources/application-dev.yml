@@ -45,8 +45,8 @@ spring:
   #email
   mail:
     host: smtp.mxhichina.com
-    username:
-    password:
+    username: admin@javaee.xyz
+    password: CAOshunmiao6moe
     port: 465
     #设置为SSL协议
     properties:
@@ -54,7 +54,7 @@ spring:
         smtp:
           socketFactory:
             class: javax.net.ssl.SSLSocketFactory
-      from:
+      from: admin@javaee.xyz
 
 mybatis-plus:
   # 在classpath前添加星号可以使项目热加载成功<br>  # 自定义xml sql文件需要配置这个

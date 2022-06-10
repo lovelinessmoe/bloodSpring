@@ -34,7 +34,7 @@ public class BloodTransForm implements Serializable {
     /**
      * 输血申请单id
      */
-    @TableId(value = "form_id", type = IdType.INPUT)
+    @TableId(value = "form_id", type = IdType.ASSIGN_ID)
     @ApiModelProperty(value = "输血申请单id")
     private String formId;
     /**

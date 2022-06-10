@@ -36,7 +36,7 @@ public class User implements Serializable {
     /**
      * 主键
      */
-    @TableId(value = "user_id", type = IdType.INPUT)
+    @TableId(value = "user_id", type = IdType.ASSIGN_ID)
     @ApiModelProperty(value = "主键")
     private String userId;
     /**

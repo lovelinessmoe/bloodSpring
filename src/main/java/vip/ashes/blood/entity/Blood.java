@@ -39,7 +39,7 @@ public class Blood implements Serializable {
     /**
      * 主键
      */
-    @TableId(value = "blood_id", type = IdType.INPUT)
+    @TableId(value = "blood_id", type = IdType.ASSIGN_ID)
     @ApiModelProperty(value = "主键")
     private String bloodId;
     /**

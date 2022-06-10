@@ -30,7 +30,7 @@ public class BloodTransSucc implements Serializable {
     /**
      * 配型
      */
-    @TableId(value = "blood_trans_succ_id", type = IdType.INPUT)
+    @TableId(value = "blood_trans_succ_id", type = IdType.ASSIGN_ID)
     @ApiModelProperty(value = "配型")
     private String bloodTransSuccId;
     /**
