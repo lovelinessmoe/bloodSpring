@@ -22,7 +22,7 @@ import vip.ashes.blood.utils.Result;
 @RequestMapping("/backstage/doctor/trans")
 public class BloodTransController {
     private BloodService bloodService;
-    /**
+    /*
      * 医生申请用血（添加一个用血申请表）
      */
 //    @PostMapping("/useBlood")
