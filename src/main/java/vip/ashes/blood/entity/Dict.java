@@ -1,8 +1,6 @@
 package vip.ashes.blood.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -14,6 +12,7 @@ import java.io.Serializable;
 
 /**
  * 字典表
+ *
  * @author loveliness
  */
 @ApiModel(value = "vip-ashes-blood-entity-Dict")
@@ -30,13 +29,11 @@ public class Dict implements Serializable {
     /**
      * 字典码
      */
-//    @TableId(value = "code", type = IdType.INPUT)
     @ApiModelProperty(value = "字典码")
     private String code;
     /**
      * 字典值
      */
-//    @TableId(value = "dict_key", type = IdType.INPUT)
     @ApiModelProperty(value = "字典值")
     private Integer dictKey;
     /**

@@ -1,12 +1,13 @@
 package vip.ashes.blood.controller.backstage.doctor;
 
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import vip.ashes.blood.entity.Blood;
-import vip.ashes.blood.entity.BloodTransForm;
 import vip.ashes.blood.service.BloodService;
 import vip.ashes.blood.utils.CurrentUserUtils;
 import vip.ashes.blood.utils.Result;
@@ -40,6 +41,4 @@ public class DoctorBloodController {
             return Result.error().message("入库失败，请联系管理员");
         }
     }
-
-
 }
