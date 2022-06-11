@@ -1,5 +1,7 @@
 package vip.ashes.blood.controller.backstage.admin;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -9,8 +11,12 @@ import vip.ashes.blood.utils.Result;
 
 import java.util.List;
 
+/**
+ * @author jh
+ */
 @RestController
 @AllArgsConstructor
+@Api(tags = "后台血液管理")
 @PreAuthorize("hasRole('ROLE_ADMIN')")
 @RequestMapping("/backstage/blood")
 public class BackBloodController {
@@ -20,7 +26,7 @@ public class BackBloodController {
      * 添加一个血液
      */
     @PutMapping("insertBlood")
-    @ApiOperation(value = "添加血液", notes = "建议协商")
+    @ApiOperation(value = "添加血液", notes = "新增一个血液")
     public Result insertBlood(@RequestBody Blood blood) {
         boolean save = bloodService.save(blood);
         if (save) {
@@ -34,7 +40,7 @@ public class BackBloodController {
      * 全部血液查看
      */
     @PostMapping("/getBloodList")
-    @ApiOperation(value = "全部血液查看", notes = "建议协商")
+    @ApiOperation(value = "全部血液查看", notes = "列出全部血液")
     public Result getBloodList() {
         List<Blood> list = bloodService.list();
         return Result.ok().data(list);
@@ -44,13 +50,13 @@ public class BackBloodController {
      * 修改血液信息
      */
     @PostMapping("/updateBlood")
-    @ApiOperation(value = "修改血液信息", notes = "建议协商")
+    @ApiOperation(value = "修改血液信息", notes = "根据bloodid修改血液信息")
     public Result updateBlood(@RequestBody Blood blood) {
         boolean save = bloodService.updateById(blood);
         if (save) {
-            return Result.ok().message("成功");
+            return Result.ok().message("修改成功");
         } else {
-            return Result.error().message("失败");
+            return Result.error().message("修改失败");
         }
     }
 
