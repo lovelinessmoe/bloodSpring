@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import vip.ashes.blood.entity.BloodTransForm;
 import vip.ashes.blood.service.BloodService;
-import vip.ashes.blood.utils.Result;
 
 /**
  * @author jh
