@@ -22,19 +22,7 @@ import java.util.List;
 public class BackBloodController {
     private BloodService bloodService;
 
-    /**
-     * 添加一个血液
-     */
-    @PutMapping("insertBlood")
-    @ApiOperation(value = "添加血液", notes = "新增一个血液")
-    public Result insertBlood(@RequestBody Blood blood) {
-        boolean save = bloodService.save(blood);
-        if (save) {
-            return Result.ok().message("添加成功");
-        } else {
-            return Result.error().message("添加失败");
-        }
-    }
+
 
     /**
      * 全部血液查看
@@ -59,5 +47,7 @@ public class BackBloodController {
             return Result.error().message("修改失败");
         }
     }
+
+
 
 }
