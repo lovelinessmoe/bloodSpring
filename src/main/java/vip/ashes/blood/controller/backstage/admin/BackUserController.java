@@ -1,4 +1,4 @@
-package vip.ashes.blood.controller.backstage;
+package vip.ashes.blood.controller.backstage.admin;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.PageDTO;
@@ -29,15 +29,6 @@ public class BackUserController {
 
     private final UserService userService;
 
-
-    /**
-     * 新增或修改用户
-     */
-    @PostMapping("/submit")
-    @ApiOperation(value = "新增或修改", notes = "传入用户")
-    public Result submit(@Valid @RequestBody User user) {
-        return Result.RCode(userService.saveOrUpdate(user), ResultCode.SUCCESS);
-    }
 
     /**
      * 修改用户

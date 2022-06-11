@@ -1,8 +1,7 @@
-package vip.ashes.blood.controller.backstage;
+package vip.ashes.blood.controller.backstage.admin;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import vip.ashes.blood.entity.Blood;
 import vip.ashes.blood.service.BloodService;
@@ -10,12 +9,9 @@ import vip.ashes.blood.utils.Result;
 
 import java.util.List;
 
-/**
- * @author jh
- */
 @RestController
-@Api(tags = "血液管理")
 @AllArgsConstructor
+@PreAuthorize("hasRole('ROLE_ADMIN')")
 @RequestMapping("/backstage/blood")
 public class BackBloodController {
     private BloodService bloodService;
