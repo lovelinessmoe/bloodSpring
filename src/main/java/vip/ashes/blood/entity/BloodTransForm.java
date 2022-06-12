@@ -27,6 +27,7 @@ public class BloodTransForm implements Serializable {
     public static final String COL_FORM_ID = "form_id";
     public static final String COL_NEED_PERSON = "need_person";
     public static final String COL_NEED_VOLUME = "need_volume";
+    public static final String COL_NEED_BLOOD_TYPE = "need_blood_type";
     public static final String COL_APPLY_USER = "apply_user";
     public static final String COL_APPLY_TIME = "apply_time";
     public static final String COL_STATE = "state";
@@ -50,6 +51,12 @@ public class BloodTransForm implements Serializable {
     @TableField(value = "need_volume")
     @ApiModelProperty(value = "预订量cc")
     private Integer needVolume;
+    /**
+     * 血液种类BLOOD_TYPE (0普通冰冻血浆、1悬浮红细胞、2机采血小板)
+     */
+    @TableField(value = "need_blood_type")
+    @ApiModelProperty(value = "血液种类BLOOD_TYPE (0普通冰冻血浆、1悬浮红细胞、2机采血小板)")
+    private Integer needBloodType;
     /**
      * 申请医师id
      */

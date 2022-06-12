@@ -12,7 +12,7 @@ import java.util.Date;
  * @author loveliness
  */
 @Data
-public class MailVo {
+public class MailVO {
     /**
      * 邮件id
      */

@@ -14,7 +14,7 @@ import org.springframework.util.ObjectUtils;
 import vip.ashes.blood.constants.UserConstants;
 import vip.ashes.blood.dao.UserMapper;
 import vip.ashes.blood.entity.User;
-import vip.ashes.blood.entity.vo.MailVo;
+import vip.ashes.blood.entity.vo.MailVO;
 import vip.ashes.blood.service.UserService;
 import vip.ashes.blood.utils.MailUtils;
 import vip.ashes.blood.utils.Result;
@@ -109,7 +109,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
 
         //发送邮件
-        MailVo mailVo = new MailVo();
+        MailVO mailVo = new MailVO();
         mailVo.setFrom("admin@javaee.xyz");
         mailVo.setTo(user.getEmail());
         mailVo.setSubject("Blood注册验证码");
@@ -136,7 +136,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         stringRedisTemplate.expire("modifyInf" + userId, 60 * 5, TimeUnit.SECONDS);
 
         //发送邮件
-        MailVo mailVo = new MailVo();
+        MailVO mailVo = new MailVO();
         mailVo.setFrom("admin@javaee.xyz");
         mailVo.setTo(user.getEmail());
         mailVo.setSubject("Blood修改信息验证码");
