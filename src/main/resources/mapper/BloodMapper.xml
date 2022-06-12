@@ -28,9 +28,7 @@
 				     SELECT *,
 				            @total := @total + temp.blood_volume AS `total_value`
 				     FROM (SELECT *
-				           FROM blood b
-				           WHERE b.state = 0
-					         AND #{ew.customSqlSegment}
+				           FROM blood b ${ew.customSqlSegment}
 				           ORDER BY b.expire_time, b.blood_volume DESC) temp,
 				          (SELECT @total := 0) T1
 				     ORDER BY blood_id ASC

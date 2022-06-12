@@ -2,22 +2,17 @@ package vip.ashes.blood.controller.backstage.admin;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
+import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import vip.ashes.blood.entity.Blood;
-import vip.ashes.blood.entity.BloodTransForm;
-import vip.ashes.blood.entity.User;
-import vip.ashes.blood.service.BloodService;
-import vip.ashes.blood.service.BloodTransFormService;
-import vip.ashes.blood.service.UserService;
+import org.springframework.web.bind.annotation.*;
+import vip.ashes.blood.entity.*;
+import vip.ashes.blood.service.*;
 import vip.ashes.blood.utils.Result;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -32,6 +27,8 @@ public class BackBloodController {
     private final BloodService bloodService;
     private final BloodTransFormService bloodTransFormService;
     private final UserService userService;
+    private final BloodTransSuccService bloodTransSuccService;
+    private final TransBloodsService transBloodsService;
 
 
     /**
@@ -59,17 +56,17 @@ public class BackBloodController {
     }
 
     /**
-     * @param bloodTransForm 血液申请单id
-     * @param accept         是否同意
+     * @param bloodTransFormId 血液申请单id
+     * @param accept           是否同意
      * @return Res
      */
-    @PostMapping("/approvalBlood")
+    @GetMapping("/approvalBlood")
     @ApiOperation(value = "管理员审批血液", notes = "管理员审批血液")
-    public Result updateBlood(@RequestBody BloodTransForm bloodTransForm, boolean accept) {
+    public Result updateBlood(@RequestParam String bloodTransFormId, @RequestParam boolean accept) {
         if (accept) {
             //同意用血
             //根据id查找申请单
-            bloodTransForm = bloodTransFormService.getById(bloodTransForm.getFormId());
+            BloodTransForm bloodTransForm = bloodTransFormService.getById(bloodTransFormId);
             //查找患者血型
             User patient = userService.getById(bloodTransForm.getNeedPerson());
             if (patient.getRh() == null || patient.getBloodGroup() == null) {
@@ -80,7 +77,8 @@ public class BackBloodController {
                     //RH
                     .eq(Blood.COL_RH, patient.getRh())
                     //BloodType
-                    .eq(Blood.COL_BLOOD_TYPE, bloodTransForm.getNeedBloodType());
+                    .eq(Blood.COL_BLOOD_TYPE, bloodTransForm.getNeedBloodType())
+                    .eq(Blood.COL_STATE, 0);
             final int BLOOD_A = 0;
             final int BLOOD_B = 1;
             final int BLOOD_AB = 2;
@@ -100,23 +98,42 @@ public class BackBloodController {
                     break;
                 default:
             }
-
             //查看血库
             List<Blood> bloodList = bloodService.checkListForTrans(bloodTransForm.getNeedVolume(), bloodQueryWrapper);
             if (bloodList.size() == 0) {
                 return Result.error().message("当前血库血液不足");
             } else {
+                //更新配型成功ID
+                //更新血液信息
+                for (Blood blood : bloodList) {
+                    blood.setState(1);
+                }
+                bloodService.updateBatchById(bloodList);
+                //构建血液组ID
+                String snowID = IdWorker.getIdStr();
+                ArrayList<TransBloods> transBloods = new ArrayList<>();
+                for (Blood blood : bloodList) {
+                    TransBloods transBloods1 = new TransBloods(snowID, blood.getBloodId());
+                    transBloods.add(transBloods1);
+                }
+                //插入血液组ID
+                transBloodsService.saveBatch(transBloods);
+                //血液配型成功表
+                BloodTransSucc bloodTransSucc = new BloodTransSucc(null, bloodTransForm.getNeedPerson(), snowID, bloodTransForm.getNeedVolume());
+                bloodTransSuccService.save(bloodTransSucc);
+                //血液申请单成功
                 UpdateWrapper<BloodTransForm> updateWrapper = new UpdateWrapper<BloodTransForm>()
                         .eq(BloodTransForm.COL_FORM_ID, bloodTransForm.getFormId())
-                        .set(BloodTransForm.COL_STATE, false);
+                        .set(BloodTransForm.COL_BLOOD_TRANS_SUCC_ID, bloodTransSucc.getBloodTransSuccId())
+                        .set(BloodTransForm.COL_STATE, 1);
                 bloodTransFormService.update(updateWrapper);
                 return Result.ok().message("审批同意");
             }
         } else {
             //拒绝用血
             UpdateWrapper<BloodTransForm> updateWrapper = new UpdateWrapper<BloodTransForm>()
-                    .eq(BloodTransForm.COL_FORM_ID, bloodTransForm.getFormId())
-                    .set(BloodTransForm.COL_STATE, false);
+                    .eq(BloodTransForm.COL_FORM_ID, bloodTransFormId)
+                    .set(BloodTransForm.COL_STATE, 2);
             bloodTransFormService.update(updateWrapper);
             return Result.ok().message("审批完成");
         }

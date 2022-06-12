@@ -9,9 +9,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import vip.ashes.blood.entity.BloodTransForm;
-import vip.ashes.blood.service.BloodService;
 import vip.ashes.blood.service.BloodTransFormService;
+import vip.ashes.blood.utils.CurrentUserUtils;
 import vip.ashes.blood.utils.Result;
+
+import java.util.Date;
 
 /**
  * @author jh
@@ -21,15 +23,21 @@ import vip.ashes.blood.utils.Result;
 @Api(tags = "申请用血表管理")
 @PreAuthorize("hasRole('ROLE_DOCTOR')")
 @RequestMapping("/backstage/doctor/trans")
-public class BloodTransController {
+public class DoctorBloodTransController {
     private BloodTransFormService bloodTransFormService;
+    private final CurrentUserUtils currentUserUtils;
 
-    /*
+    /**
      * 医生申请用血（添加一个用血申请表）
+     * @param bloodTransForm 医生申请单 needVolume needBloodType needPerson
+     * @return Res
      */
     @PostMapping("/useBlood")
     @ApiOperation(value = "医生申请用血", notes = "上传血液申请单")
     public Result useBlood(@RequestBody BloodTransForm bloodTransForm) {
+        String applyUserId = currentUserUtils.getCurrentUser().getUserId();
+        bloodTransForm.setApplyUser(applyUserId);
+        bloodTransForm.setApplyTime(new Date());
         boolean save = bloodTransFormService.save(bloodTransForm);
         if (save) {
             return Result.ok().message("申请表提交成功");
