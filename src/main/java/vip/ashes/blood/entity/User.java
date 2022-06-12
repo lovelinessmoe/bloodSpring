@@ -57,7 +57,6 @@ public class User implements Serializable {
      */
     @TableField(value = "password")
     @ApiModelProperty(value = "登录密码，加密后保存")
-    @JsonIgnore
     private String password;
     /**
      * 邮箱

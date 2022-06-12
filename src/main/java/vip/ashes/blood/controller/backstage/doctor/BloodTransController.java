@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import vip.ashes.blood.entity.BloodTransForm;
 import vip.ashes.blood.service.BloodService;
+import vip.ashes.blood.service.BloodTransFormService;
+import vip.ashes.blood.utils.Result;
 
 /**
  * @author jh
@@ -20,18 +22,19 @@ import vip.ashes.blood.service.BloodService;
 @PreAuthorize("hasRole('ROLE_DOCTOR')")
 @RequestMapping("/backstage/doctor/trans")
 public class BloodTransController {
-    private BloodService bloodService;
+    private BloodTransFormService bloodTransFormService;
+
     /*
      * 医生申请用血（添加一个用血申请表）
      */
-//    @PostMapping("/useBlood")
-//    @ApiOperation(value = "医生申请用血", notes = "上传血液申请单")
-//    public Result useBlood(@RequestBody BloodTransForm bloodTransForm) {
-//        boolean save = bloodService.save();
-//        if (save) {
-//            return Result.ok().message("申请表提交成功");
-//        } else {
-//            return Result.error().message("申请失败，请联系管理员");
-//        }
-//    }
+    @PostMapping("/useBlood")
+    @ApiOperation(value = "医生申请用血", notes = "上传血液申请单")
+    public Result useBlood(@RequestBody BloodTransForm bloodTransForm) {
+        boolean save = bloodTransFormService.save(bloodTransForm);
+        if (save) {
+            return Result.ok().message("申请表提交成功");
+        } else {
+            return Result.error().message("申请失败，请联系管理员");
+        }
+    }
 }
