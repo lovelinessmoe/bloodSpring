@@ -1,25 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="vip.ashes.blood.dao.BloodMapper">
-  <resultMap id="BaseResultMap" type="vip.ashes.blood.entity.Blood">
-    <!--@mbg.generated-->
-    <!--@Table blood.blood-->
-    <id column="blood_id" jdbcType="CHAR" property="bloodId" />
-    <result column="in_time" jdbcType="TIMESTAMP" property="inTime" />
-    <result column="in_source" jdbcType="VARCHAR" property="inSource" />
-    <result column="in_person" jdbcType="CHAR" property="inPerson" />
-    <result column="blood_type" jdbcType="INTEGER" property="bloodType" />
-    <result column="take_time" jdbcType="TIMESTAMP" property="takeTime" />
-    <result column="expire_time" jdbcType="TIMESTAMP" property="expireTime" />
-    <result column="blood_group" jdbcType="INTEGER" property="bloodGroup" />
-    <result column="rh" jdbcType="INTEGER" property="rh" />
-    <result column="take_person" jdbcType="CHAR" property="takePerson" />
-    <result column="blood_volume" jdbcType="INTEGER" property="bloodVolume" />
-    <result column="state" jdbcType="INTEGER" property="state" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    <!--@mbg.generated-->
-    blood_id, in_time, in_source, in_person, blood_type, take_time, expire_time, blood_group, 
-    rh, take_person, blood_volume, `state`
-  </sql>
+	<resultMap id="BaseResultMap" type="vip.ashes.blood.entity.Blood">
+		<!--@mbg.generated-->
+		<!--@Table blood.blood-->
+		<id column="blood_id" jdbcType="CHAR" property="bloodId"/>
+		<result column="in_time" jdbcType="TIMESTAMP" property="inTime"/>
+		<result column="in_source" jdbcType="VARCHAR" property="inSource"/>
+		<result column="in_person" jdbcType="CHAR" property="inPerson"/>
+		<result column="blood_type" jdbcType="INTEGER" property="bloodType"/>
+		<result column="take_time" jdbcType="TIMESTAMP" property="takeTime"/>
+		<result column="expire_time" jdbcType="TIMESTAMP" property="expireTime"/>
+		<result column="blood_group" jdbcType="INTEGER" property="bloodGroup"/>
+		<result column="rh" jdbcType="INTEGER" property="rh"/>
+		<result column="take_person" jdbcType="CHAR" property="takePerson"/>
+		<result column="blood_volume" jdbcType="INTEGER" property="bloodVolume"/>
+		<result column="state" jdbcType="INTEGER" property="state"/>
+	</resultMap>
+	<sql id="Base_Column_List">
+		<!--@mbg.generated-->
+		blood_id, in_time, in_source, in_person, blood_type, take_time, expire_time, blood_group,
+		rh, take_person, blood_volume, `state`
+	</sql>
+	<select id="checkListForTrans" resultType="vip.ashes.blood.entity.vo.BloodVO">
+		SELECT *
+		FROM (
+				     SELECT *,
+				            @total := @total + temp.blood_volume AS `total_value`
+				     FROM (SELECT *
+				           FROM blood b
+				           WHERE b.state = 0
+					         AND #{ew.customSqlSegment}
+				           ORDER BY b.expire_time, b.blood_volume DESC) temp,
+				          (SELECT @total := 0) T1
+				     ORDER BY blood_id ASC
+				     ) a
+		WHERE total_value - `blood_volume` &lt; #{needVolume,jdbcType=INTEGER};
+	</select>
 </mapper>

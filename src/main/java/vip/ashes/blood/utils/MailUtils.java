@@ -7,7 +7,7 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.multipart.MultipartFile;
-import vip.ashes.blood.entity.vo.MailVo;
+import vip.ashes.blood.entity.vo.MailVO;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
@@ -26,7 +26,7 @@ public class MailUtils {
     @Resource
     private JavaMailSenderImpl javaMailSender;
 
-    public static MailVo sendMail(MailVo mailVo) {
+    public static MailVO sendMail(MailVO mailVo) {
         try {
             //1.检测邮件
             checkMail(mailVo);
@@ -46,7 +46,7 @@ public class MailUtils {
      *
      * @param mailVo 邮箱实体
      */
-    private static void checkMail(MailVo mailVo) {
+    private static void checkMail(MailVO mailVo) {
         if (ObjectUtils.isEmpty(mailVo.getTo())) {
             throw new RuntimeException("邮件收信人不能为空");
         }
@@ -63,7 +63,7 @@ public class MailUtils {
      *
      * @param mailVo 邮箱实体
      */
-    private static void sendMimeMail(MailVo mailVo) {
+    private static void sendMimeMail(MailVO mailVo) {
         try {
             MimeMessageHelper messageHelper = new MimeMessageHelper(mailSender.createMimeMessage(), true);
             //true表示支持复杂类型
@@ -111,7 +111,7 @@ public class MailUtils {
      * @param mailVo 邮箱实体
      * @return 原样返回
      */
-    private static MailVo saveMail(MailVo mailVo) {
+    private static MailVO saveMail(MailVO mailVo) {
 
         //将邮件保存到数据库..
 
