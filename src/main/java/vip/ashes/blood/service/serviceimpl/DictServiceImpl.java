@@ -28,4 +28,6 @@ public class DictServiceImpl extends ServiceImpl<DictMapper, Dict> implements Di
         List<DictVO> dictVOS = dictConverter.dictsToVos(dicts);
         return dictVOS;
     }
+
+
 }

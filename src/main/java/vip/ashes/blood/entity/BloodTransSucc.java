@@ -14,6 +14,7 @@ import java.io.Serializable;
 
 /**
  * 配型成功的血液对应
+ *
  * @author loveliness
  */
 @ApiModel(value = "vip-ashes-blood-entity-BloodTransSucc")

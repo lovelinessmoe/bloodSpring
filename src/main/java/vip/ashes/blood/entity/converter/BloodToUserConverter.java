@@ -13,6 +13,7 @@ public interface BloodToUserConverter {
 
     /**
      * 将血液中的信息附加到用户上
+     *
      * @param blood 血液
      * @return 用户
      */

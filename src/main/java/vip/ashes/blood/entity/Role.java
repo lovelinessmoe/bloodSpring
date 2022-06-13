@@ -14,6 +14,7 @@ import java.io.Serializable;
 
 /**
  * 角色
+ *
  * @author loveliness
  */
 @ApiModel(value = "vip-ashes-blood-entity-Role")

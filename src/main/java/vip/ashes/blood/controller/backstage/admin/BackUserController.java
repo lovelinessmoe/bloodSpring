@@ -68,8 +68,7 @@ public class BackUserController {
     }
 
     /**
-     *
-     * @param user 筛选用户
+     * @param user  筛选用户
      * @param query 分页
      * @return Result
      */

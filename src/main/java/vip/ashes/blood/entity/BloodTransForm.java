@@ -16,6 +16,7 @@ import java.util.Date;
 
 /**
  * 输血申请单
+ *
  * @author loveliness
  */
 @ApiModel(value = "vip-ashes-blood-entity-BloodTransForm")

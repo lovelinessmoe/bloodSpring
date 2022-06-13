@@ -11,6 +11,7 @@ import java.io.Serializable;
 
 /**
  * 配型的血液组
+ *
  * @author loveliness
  */
 @ApiModel(value = "vip-ashes-blood-entity-TransBloods")

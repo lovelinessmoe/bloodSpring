@@ -4,7 +4,9 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import vip.ashes.blood.entity.vo.DictVO;
 import vip.ashes.blood.service.DictService;
 import vip.ashes.blood.utils.Result;
@@ -42,4 +44,5 @@ public class DictController {
         List<DictVO> dictByCode = dictService.getDictByCode(code);
         return Result.ok().data(dictByCode);
     }
+
 }

@@ -1,6 +1,5 @@
 package vip.ashes.blood.entity.vo;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.util.Date;

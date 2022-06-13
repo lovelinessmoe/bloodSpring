@@ -24,11 +24,12 @@ import java.util.Date;
 @PreAuthorize("hasRole('ROLE_DOCTOR')")
 @RequestMapping("/backstage/doctor/trans")
 public class DoctorBloodTransController {
-    private BloodTransFormService bloodTransFormService;
     private final CurrentUserUtils currentUserUtils;
+    private BloodTransFormService bloodTransFormService;
 
     /**
      * 医生申请用血（添加一个用血申请表）
+     *
      * @param bloodTransForm 医生申请单 needVolume needBloodType needPerson
      * @return Res
      */

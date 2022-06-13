@@ -17,9 +17,10 @@ import java.util.List;
 public interface BloodMapper extends BaseMapper<Blood> {
     /**
      * 获取需要血液的列表
-     * @param needVolume 需要的容量
+     *
+     * @param needVolume        需要的容量
      * @param bloodQueryWrapper 筛选条件 血型ABO RH
      * @return
      */
-    List<BloodVO> checkListForTrans(@Param("needVolume")Integer needVolume, @Param(Constants.WRAPPER) QueryWrapper<Blood> bloodQueryWrapper);
+    List<BloodVO> checkListForTrans(@Param("needVolume") Integer needVolume, @Param(Constants.WRAPPER) QueryWrapper<Blood> bloodQueryWrapper);
 }

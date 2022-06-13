@@ -16,6 +16,7 @@ import java.util.Date;
 
 /**
  * 血液信息
+ *
  * @author loveliness
  */
 @ApiModel(value = "vip-ashes-blood-entity-Blood")
@@ -72,14 +73,14 @@ public class Blood implements Serializable {
      */
     @TableField(value = "take_time")
     @ApiModelProperty(value = "采血日期")
-    @JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(locale = "zh", timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     private Date takeTime;
     /**
      * 过期日期
      */
     @TableField(value = "expire_time")
     @ApiModelProperty(value = "过期日期")
-    @JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(locale = "zh", timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     private Date expireTime;
     /**
      * 血型BLOOD_GROUP(abo)

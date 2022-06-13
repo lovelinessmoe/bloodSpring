@@ -27,6 +27,7 @@ public interface DictConverter {
 
     /**
      * list Dict 转换
+     *
      * @param dicts dict对象组
      * @return dictVO对象组
      */

@@ -2,14 +2,19 @@ package vip.ashes.blood.controller.backstage.doctor;
 
 import cn.hutool.core.date.DateUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.PageDTO;
+import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import vip.ashes.blood.entity.Blood;
 import vip.ashes.blood.entity.BloodTransForm;
+import vip.ashes.blood.entity.User;
 import vip.ashes.blood.service.BloodService;
 import vip.ashes.blood.service.BloodTransFormService;
+import vip.ashes.blood.service.UserService;
 import vip.ashes.blood.utils.CurrentUserUtils;
 import vip.ashes.blood.utils.Result;
 
@@ -27,7 +32,8 @@ import java.util.List;
 public class DoctorBloodController {
     private final BloodService bloodService;
     private final CurrentUserUtils currentUserUtils;
-    private BloodTransFormService bloodTransFormService;
+    private final BloodTransFormService bloodTransFormService;
+    private final UserService userService;
 
     /**
      * 医生抽血
@@ -35,7 +41,7 @@ public class DoctorBloodController {
      * @param blood 添加的血液信息
      * @return Result状态消息
      */
-    @PutMapping("takeBlood")
+    @PutMapping("/takeBlood")
     public Result insertBlood(@RequestBody Blood blood) {
         //添加抽血人id
         blood.setTakePerson(currentUserUtils.getCurrentUser().getUserId());
@@ -73,7 +79,7 @@ public class DoctorBloodController {
      *
      * @return
      */
-    @PostMapping("applyList")
+    @PostMapping("/applyList")
     public Result applyList() {
 
         String applyUserId = currentUserUtils.getCurrentUser().getUserId();
@@ -83,4 +89,23 @@ public class DoctorBloodController {
         return Result.ok().data(list);
     }
 
+
+    /**
+     * @param user  筛选用户
+     * @param query 分页
+     * @return Result
+     */
+    @GetMapping("/userList")
+    @ApiOperationSupport(order = 2)
+    @ApiOperation(value = "分页", notes = "传入用户")
+    public Result list(User user, PageDTO<User> query) {
+        QueryWrapper<User> userQueryWrapper = new QueryWrapper<>(user);
+        //用户的角色id
+        final int userRoleNum = 2;
+        userQueryWrapper.eq(User.COL_ROLE_ID, userRoleNum)
+                .select(User.COL_USER_ID, User.COL_AGE, User.COL_BLOOD_GROUP, User.COL_REAL_NAME,
+                        User.COL_RH, User.COL_SEX, User.COL_REAL_NAME, User.COL_USER_NAME);
+        PageDTO<User> pages = userService.page(query, userQueryWrapper);
+        return Result.ok().data(pages);
+    }
 }

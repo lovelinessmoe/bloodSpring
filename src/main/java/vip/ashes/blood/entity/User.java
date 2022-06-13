@@ -1,10 +1,6 @@
 package vip.ashes.blood.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.baomidou.mybatisplus.annotation.*;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -15,6 +11,7 @@ import java.io.Serializable;
 
 /**
  * 用户大表,管理员和医生都是这张
+ *
  * @author loveliness
  */
 @ApiModel(value = "vip-ashes-blood-entity-User")
@@ -49,7 +46,7 @@ public class User implements Serializable {
     /**
      * 昵称
      */
-    @TableField(value = "user_name")
+    @TableField(value = "user_name", condition = SqlCondition.LIKE)
     @ApiModelProperty(value = "昵称")
     private String userName;
     /**
@@ -61,13 +58,13 @@ public class User implements Serializable {
     /**
      * 邮箱
      */
-    @TableField(value = "email")
+    @TableField(value = "email", condition = SqlCondition.LIKE)
     @ApiModelProperty(value = "邮箱")
     private String email;
     /**
      * 姓名
      */
-    @TableField(value = "real_name")
+    @TableField(value = "real_name", condition = SqlCondition.LIKE)
     @ApiModelProperty(value = "姓名")
     private String realName;
     /**
