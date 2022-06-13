@@ -3,6 +3,7 @@ package vip.ashes.blood.controller.backstage.admin;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.toolkit.IdWorker;
+import com.baomidou.mybatisplus.extension.plugins.pagination.PageDTO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
@@ -32,13 +33,20 @@ public class BackBloodController {
 
 
     /**
-     * 全部血液查看
+     * 全部血液查看并且分页
+     *
+     * @param query
+     * @param blood
+     * @return
      */
     @PostMapping("/getBloodList")
     @ApiOperation(value = "全部血液查看", notes = "列出全部血液")
-    public Result getBloodList() {
-        List<Blood> list = bloodService.list();
-        return Result.ok().data(list);
+    public Result getBloodList(PageDTO<Blood> query, Blood blood) {
+
+        QueryWrapper<Blood> bloodQueryWrapper = new QueryWrapper<>(blood);
+        PageDTO<Blood> pages = bloodService.page(query, bloodQueryWrapper);
+        return Result.ok().data(pages);
+
     }
 
     /**

@@ -68,7 +68,11 @@ public class DoctorBloodController {
     }
 
 
-    //医生查看自己的申请单
+    /**
+     * 医生查看自己的申请记录
+     *
+     * @return
+     */
     @PostMapping("applyList")
     public Result applyList() {
 
