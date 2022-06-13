@@ -31,6 +31,15 @@ public class BackUserController {
 
 
     /**
+     * 新增或修改用户
+     */
+    @PostMapping("/submit")
+    @ApiOperation(value = "新增或修改", notes = "传入用户")
+    public Result submit(@Valid @RequestBody User user) {
+        return Result.RCode(userService.saveOrUpdate(user), ResultCode.SUCCESS);
+    }
+
+    /**
      * 修改用户
      */
     @PostMapping("/update")
@@ -43,9 +52,9 @@ public class BackUserController {
      * 删除用户
      */
     @PostMapping("/remove")
-    @ApiOperation(value = "删除用户", notes = "传入ids")
-    public Result remove(@ApiParam(value = "主键集合", required = true) @RequestParam String ids) {
-        return Result.RCode(userService.removeById(ids), ResultCode.SUCCESS);
+    @ApiOperation(value = "删除用户", notes = "传入id")
+    public Result remove(@ApiParam(value = "主键", required = true) @RequestParam String id) {
+        return Result.RCode(userService.removeById(id), ResultCode.SUCCESS);
     }
 
     /**

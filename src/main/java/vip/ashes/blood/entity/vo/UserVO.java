@@ -13,10 +13,6 @@ public class UserVO {
      */
     private String userName;
 
-    /**
-     * 登录密码，加密后保存
-     */
-    private String password;
 
     /**
      * 邮箱
