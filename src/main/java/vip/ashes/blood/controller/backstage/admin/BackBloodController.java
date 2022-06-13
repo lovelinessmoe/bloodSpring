@@ -45,7 +45,7 @@ public class BackBloodController {
      * 修改血液信息
      */
     @PostMapping("/updateBlood")
-    @ApiOperation(value = "修改血液信息", notes = "根据bloodid修改血液信息")
+    @ApiOperation(value = "修改血液信息", notes = "根据bloodId修改血液信息")
     public Result updateBlood(@RequestBody Blood blood) {
         boolean save = bloodService.updateById(blood);
         if (save) {
