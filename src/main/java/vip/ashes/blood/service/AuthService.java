@@ -47,7 +47,7 @@ public class AuthService {
                 .collect(Collectors.toList());
         //使用email创建token
         String token = JwtTokenUtils.createToken(user.getEmail(), user.getUserId(), authorities, true);
-        stringRedisTemplate.opsForValue().set(user.getUserId(), token);
+        stringRedisTemplate.opsForValue().set("LOGIN_" + user.getUserId(), token);
         jwtUser.setToken(token);
 
         return Result.ok().data(jwtUser);
