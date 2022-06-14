@@ -9,8 +9,14 @@ import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import vip.ashes.blood.entity.*;
-import vip.ashes.blood.service.*;
+import vip.ashes.blood.entity.Blood;
+import vip.ashes.blood.entity.BloodTransForm;
+import vip.ashes.blood.entity.TransBloods;
+import vip.ashes.blood.entity.User;
+import vip.ashes.blood.service.BloodService;
+import vip.ashes.blood.service.BloodTransFormService;
+import vip.ashes.blood.service.TransBloodsService;
+import vip.ashes.blood.service.UserService;
 import vip.ashes.blood.utils.Result;
 
 import java.util.ArrayList;
@@ -28,7 +34,6 @@ public class BackBloodController {
     private final BloodService bloodService;
     private final BloodTransFormService bloodTransFormService;
     private final UserService userService;
-    private final BloodTransSuccService bloodTransSuccService;
     private final TransBloodsService transBloodsService;
 
 
@@ -86,6 +91,8 @@ public class BackBloodController {
                     .eq(Blood.COL_RH, patient.getRh())
                     //BloodType
                     .eq(Blood.COL_BLOOD_TYPE, bloodTransForm.getNeedBloodType())
+                    //血液容量不等于0
+                    .ne(Blood.COL_BLOOD_VOLUME, 0)
                     .eq(Blood.COL_STATE, 0);
             final int BLOOD_A = 0;
             final int BLOOD_B = 1;
@@ -126,13 +133,10 @@ public class BackBloodController {
                 }
                 //插入血液组ID
                 transBloodsService.saveBatch(transBloods);
-                //血液配型成功表
-                BloodTransSucc bloodTransSucc = new BloodTransSucc(null, bloodTransForm.getNeedPerson(), snowID, bloodTransForm.getNeedVolume());
-                bloodTransSuccService.save(bloodTransSucc);
                 //血液申请单成功
                 UpdateWrapper<BloodTransForm> updateWrapper = new UpdateWrapper<BloodTransForm>()
                         .eq(BloodTransForm.COL_FORM_ID, bloodTransForm.getFormId())
-                        .set(BloodTransForm.COL_BLOOD_TRANS_SUCC_ID, bloodTransSucc.getBloodTransSuccId())
+                        .set(BloodTransForm.COL_TRANS_BLOODS_ID, snowID)
                         .set(BloodTransForm.COL_STATE, 1);
                 bloodTransFormService.update(updateWrapper);
                 return Result.ok().message("审批同意");

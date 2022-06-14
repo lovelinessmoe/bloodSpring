@@ -49,6 +49,7 @@ public class Blood implements Serializable {
      */
     @TableField(value = "in_time")
     @ApiModelProperty(value = "入库时间")
+    @JsonFormat(locale = "zh", timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     private Date inTime;
     /**
      * 血液来源

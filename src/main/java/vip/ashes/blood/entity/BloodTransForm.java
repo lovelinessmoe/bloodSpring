@@ -32,7 +32,7 @@ public class BloodTransForm implements Serializable {
     public static final String COL_APPLY_USER = "apply_user";
     public static final String COL_APPLY_TIME = "apply_time";
     public static final String COL_STATE = "state";
-    public static final String COL_BLOOD_TRANS_SUCC_ID = "blood_trans_succ_id";
+    public static final String COL_TRANS_BLOODS_ID = "trans_bloods_id";
     private static final long serialVersionUID = 1L;
     /**
      * 输血申请单id
@@ -78,9 +78,9 @@ public class BloodTransForm implements Serializable {
     @ApiModelProperty(value = "申请单状态BLOOD_TRANS_FORM_STATE(0申请未处理 1通过 2拒绝)")
     private String state;
     /**
-     * 输血申请成功匹配id
+     * 输血申请成功的配型id
      */
-    @TableField(value = "blood_trans_succ_id")
-    @ApiModelProperty(value = "输血申请成功匹配id")
-    private String bloodTransSuccId;
+    @TableField(value = "trans_bloods_id")
+    @ApiModelProperty(value = "输血申请成功的配型id")
+    private String transBloodsId;
 }

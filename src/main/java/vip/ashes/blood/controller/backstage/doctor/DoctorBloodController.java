@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import vip.ashes.blood.entity.Blood;
 import vip.ashes.blood.entity.BloodTransForm;
 import vip.ashes.blood.entity.User;
+import vip.ashes.blood.entity.converter.BloodToUserConverter;
 import vip.ashes.blood.service.BloodService;
 import vip.ashes.blood.service.BloodTransFormService;
 import vip.ashes.blood.service.UserService;
@@ -34,6 +35,7 @@ public class DoctorBloodController {
     private final CurrentUserUtils currentUserUtils;
     private final BloodTransFormService bloodTransFormService;
     private final UserService userService;
+    private final BloodToUserConverter bloodToUserConverter;
 
     /**
      * 医生抽血
@@ -43,6 +45,10 @@ public class DoctorBloodController {
      */
     @PutMapping("/takeBlood")
     public Result insertBlood(@RequestBody Blood blood) {
+        //转换实体,将抽血信息添加到用户信息
+        User user = bloodToUserConverter.bloodToUserInfo(blood);
+        userService.updateById(user);
+
         //添加抽血人id
         blood.setTakePerson(currentUserUtils.getCurrentUser().getUserId());
         //添加抽血时间

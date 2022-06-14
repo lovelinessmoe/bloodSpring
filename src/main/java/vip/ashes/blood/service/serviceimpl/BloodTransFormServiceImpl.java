@@ -13,3 +13,4 @@ import vip.ashes.blood.service.BloodTransFormService;
 public class BloodTransFormServiceImpl extends ServiceImpl<BloodTransFormMapper, BloodTransForm> implements BloodTransFormService {
 
 }
+
