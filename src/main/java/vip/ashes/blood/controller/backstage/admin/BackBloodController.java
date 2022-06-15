@@ -56,6 +56,9 @@ public class BackBloodController {
 
     /**
      * 修改血液信息
+     *
+     * @param blood
+     * @return
      */
     @PostMapping("/updateBlood")
     @ApiOperation(value = "修改血液信息", notes = "根据bloodId修改血液信息")

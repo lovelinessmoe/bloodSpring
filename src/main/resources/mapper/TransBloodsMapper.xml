@@ -4,11 +4,18 @@
   <resultMap id="BaseResultMap" type="vip.ashes.blood.entity.TransBloods">
     <!--@mbg.generated-->
     <!--@Table blood.trans_bloods-->
-    <id column="trans_bloods_id" jdbcType="CHAR" property="transBloodsId" />
-    <id column="blood_id" jdbcType="CHAR" property="bloodId" />
+    <id column="trans_bloods_id" jdbcType="CHAR" property="transBloodsId"/>
+    <id column="blood_id" jdbcType="CHAR" property="bloodId"/>
   </resultMap>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
     trans_bloods_id, blood_id
   </sql>
+
+  <select id="lookbyblood" resultType="vip.ashes.blood.entity.TransBloods">
+    select blood_id
+    from trans_bloods a
+           inner join blood_trans_form b
+                      on a.trans_bloods_id = b.trans_bloods_id
+  </select>
 </mapper>
