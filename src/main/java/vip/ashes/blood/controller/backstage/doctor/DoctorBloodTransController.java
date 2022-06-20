@@ -54,7 +54,7 @@ public class DoctorBloodTransController {
     }
 
     /**
-     * 查看申请单对应的血液
+     * 查看申请单对应的血液。
      * @param form_id 申请单id
      * @return
      */

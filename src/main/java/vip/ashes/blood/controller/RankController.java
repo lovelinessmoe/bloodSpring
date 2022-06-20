@@ -21,7 +21,7 @@ public class RankController {
     private final BloodService bloodService;
 
     /**
-     * 获取排行榜
+     * 获取排行榜。
      * @return
      */
     @GetMapping("/getRankList")
