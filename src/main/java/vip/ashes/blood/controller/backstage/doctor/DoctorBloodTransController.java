@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import vip.ashes.blood.dao.TransBloodsMapper;
+import vip.ashes.blood.entity.Blood;
 import vip.ashes.blood.entity.BloodTransForm;
 import vip.ashes.blood.entity.TransBloods;
 import vip.ashes.blood.service.BloodTransFormService;
@@ -30,9 +31,7 @@ import java.util.List;
 @RequestMapping("/backstage/doctor/trans")
 public class DoctorBloodTransController {
     private final CurrentUserUtils currentUserUtils;
-    private BloodTransFormService bloodTransFormService;
-    @Autowired
-    TransBloodsMapper transBloodsMapper;
+    private final BloodTransFormService bloodTransFormService;
 
     /**
      * 医生申请用血（添加一个用血申请表）
@@ -59,11 +58,10 @@ public class DoctorBloodTransController {
      *
      * @return
      */
-    @PostMapping("/lookByblood")
+    @PostMapping("/lookByBlood")
     @ApiOperation(value = "查看申请单对应的血液", notes = "无")
-    public Result lookByblood() {
-
-        List<TransBloods> list = transBloodsMapper.lookbyblood();
+    public Result lookByBlood(String form_id) {
+        List<Blood> list = bloodTransFormService.lookByBlood(form_id);
         return Result.ok().data(list);
     }
 }

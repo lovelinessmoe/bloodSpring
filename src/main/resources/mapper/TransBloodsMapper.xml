@@ -1,25 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="vip.ashes.blood.dao.TransBloodsMapper">
-  <resultMap id="BaseResultMap" type="vip.ashes.blood.entity.TransBloods">
-    <!--@mbg.generated-->
-    <!--@Table blood.trans_bloods-->
-    <id column="trans_bloods_id" jdbcType="CHAR" property="transBloodsId"/>
-    <id column="blood_id" jdbcType="CHAR" property="bloodId"/>
-  </resultMap>
-  <sql id="Base_Column_List">
-    <!--@mbg.generated-->
-    trans_bloods_id, blood_id
-  </sql>
+	<resultMap id="BaseResultMap" type="vip.ashes.blood.entity.TransBloods">
+		<!--@mbg.generated-->
+		<!--@Table blood.trans_bloods-->
+		<id column="trans_bloods_id" jdbcType="CHAR" property="transBloodsId"/>
+		<id column="blood_id" jdbcType="CHAR" property="bloodId"/>
+	</resultMap>
+	<sql id="Base_Column_List">
+		<!--@mbg.generated-->
+		trans_bloods_id, blood_id
+	</sql>
 
-  <select id="lookbyblood" resultType="vip.ashes.blood.entity.Blood">
-
-    SELECT *
-    from blood
-    WHERE blood_id IN (
-      select blood_id
-      from trans_bloods a
-             inner join blood_trans_form b
-                        on a.trans_bloods_id = b.trans_bloods_id)
-  </select>
+	<select id="lookByBlood" resultType="vip.ashes.blood.entity.Blood">
+		SELECT *
+		FROM blood
+		WHERE blood_id IN (
+				SELECT blood_id
+				FROM trans_bloods tb
+						     INNER JOIN blood_trans_form btf ON tb.trans_bloods_id = btf.trans_bloods_id
+				WHERE btf.form_id = #{bloodTransId})
+	</select>
 </mapper>
