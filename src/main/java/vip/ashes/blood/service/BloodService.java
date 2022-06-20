@@ -17,7 +17,7 @@ public interface BloodService extends IService<Blood> {
      *
      * @param needVolume        需要的容量
      * @param bloodQueryWrapper 筛选条件 血型ABO RH
-     * @return 获取需要血液的列表,不符合返回空List
+     * @return 获取需要血液的列表, 不符合返回空List
      */
     List<Blood> checkListForTrans(Integer needVolume, QueryWrapper<Blood> bloodQueryWrapper);
 

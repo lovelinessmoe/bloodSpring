@@ -3,7 +3,9 @@ package vip.ashes.blood.controller;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import vip.ashes.blood.entity.vo.RankVO;
 import vip.ashes.blood.service.BloodService;
 import vip.ashes.blood.utils.Result;
@@ -22,6 +24,7 @@ public class RankController {
 
     /**
      * 获取排行榜。
+     *
      * @return
      */
     @GetMapping("/getRankList")

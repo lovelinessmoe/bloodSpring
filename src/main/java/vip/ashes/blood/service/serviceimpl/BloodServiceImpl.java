@@ -28,7 +28,7 @@ public class BloodServiceImpl extends ServiceImpl<BloodMapper, Blood> implements
     public List<Blood> checkListForTrans(Integer needVolume, QueryWrapper<Blood> bloodQueryWrapper) {
         List<BloodVO> bloodVOS = bloodMapper.checkListForTrans(needVolume, bloodQueryWrapper);
         //最后一个的总和加起来不够
-        if (bloodVOS.get(bloodVOS.size() - 1).getTotalValue() < needVolume) {
+        if (bloodVOS.size() == 0 || (bloodVOS.get(bloodVOS.size() - 1).getTotalValue() < needVolume)) {
             return new ArrayList<>();
         } else {
             return bloodConverter.bloodVOToblood(bloodVOS);

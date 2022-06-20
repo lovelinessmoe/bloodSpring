@@ -76,7 +76,7 @@ public class BloodTransForm implements Serializable {
      */
     @TableField(value = "state")
     @ApiModelProperty(value = "申请单状态BLOOD_TRANS_FORM_STATE(0申请未处理 1通过 2拒绝)")
-    private String state;
+    private Integer state;
     /**
      * 输血申请成功的配型id
      */

@@ -20,7 +20,6 @@ import vip.ashes.blood.utils.CurrentUserUtils;
 import vip.ashes.blood.utils.Result;
 
 import java.util.Date;
-import java.util.List;
 
 /**
  * @author loveliness
@@ -87,13 +86,12 @@ public class DoctorBloodController {
      */
     @PostMapping("/applyList")
     @ApiOperation(value = "医生查看自己的申请记录", notes = "无")
-    public Result applyList() {
-
+    public Result applyList(PageDTO<BloodTransForm> query) {
         String applyUserId = currentUserUtils.getCurrentUser().getUserId();
         QueryWrapper<BloodTransForm> wrapper = new QueryWrapper<>();
         wrapper.eq(BloodTransForm.COL_APPLY_USER, applyUserId);
-        List<BloodTransForm> list = bloodTransFormService.list(wrapper);
-        return Result.ok().data(list);
+        PageDTO<BloodTransForm> page = bloodTransFormService.page(query, wrapper);
+        return Result.ok().data(page);
     }
 
 

@@ -13,6 +13,7 @@ public interface BloodTransFormService extends IService<BloodTransForm> {
 
     /**
      * 获取申请单对应的血液信息
+     *
      * @param bloodTransId 申请单id
      * @return 血液
      */
