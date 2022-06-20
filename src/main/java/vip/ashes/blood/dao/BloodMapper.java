@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import vip.ashes.blood.entity.Blood;
 import vip.ashes.blood.entity.vo.BloodVO;
+import vip.ashes.blood.entity.vo.RankVO;
 
 import java.util.List;
 
@@ -20,7 +21,9 @@ public interface BloodMapper extends BaseMapper<Blood> {
      *
      * @param needVolume        需要的容量
      * @param bloodQueryWrapper 筛选条件 血型ABO RH
-     * @return
+     * @return 获取需要血液的列表
      */
     List<BloodVO> checkListForTrans(@Param("needVolume") Integer needVolume, @Param(Constants.WRAPPER) QueryWrapper<Blood> bloodQueryWrapper);
+
+    List<RankVO> getRankList();
 }

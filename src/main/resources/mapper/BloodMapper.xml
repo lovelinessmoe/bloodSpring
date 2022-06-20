@@ -31,8 +31,18 @@
 				           FROM blood b ${ew.customSqlSegment}
 				           ORDER BY b.expire_time, b.blood_volume DESC) temp,
 				          (SELECT @total := 0) T1
-				     ORDER BY blood_id ASC
+				     ORDER BY blood_id
 				     ) a
 		WHERE total_value - `blood_volume` &lt; #{needVolume,jdbcType=INTEGER};
+	</select>
+	<select id="getRankList" resultType="vip.ashes.blood.entity.vo.RankVO">
+		SELECT `user`.user_name,
+		       `user`.real_name,
+		       SUM(blood.blood_volume) volume_sum
+		FROM blood
+				     INNER JOIN `user` ON `user`.user_id = blood.in_person
+		GROUP BY in_person
+		ORDER BY volume_sum DESC
+		LIMIT 10
 	</select>
 </mapper>

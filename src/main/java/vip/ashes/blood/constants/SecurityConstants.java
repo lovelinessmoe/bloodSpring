@@ -52,8 +52,7 @@ public final class SecurityConstants {
      */
     public static final String[] SYSTEM_WHITELIST = {
             "/auth/*",
-            "/article/**",
-            "/comment/**",
+            "/rank/**",
     };
 
 

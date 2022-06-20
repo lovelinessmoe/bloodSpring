@@ -8,6 +8,7 @@ import vip.ashes.blood.dao.BloodMapper;
 import vip.ashes.blood.entity.Blood;
 import vip.ashes.blood.entity.converter.BloodConverter;
 import vip.ashes.blood.entity.vo.BloodVO;
+import vip.ashes.blood.entity.vo.RankVO;
 import vip.ashes.blood.service.BloodService;
 
 import java.util.ArrayList;
@@ -28,11 +29,15 @@ public class BloodServiceImpl extends ServiceImpl<BloodMapper, Blood> implements
         List<BloodVO> bloodVOS = bloodMapper.checkListForTrans(needVolume, bloodQueryWrapper);
         //最后一个的总和加起来不够
         if (bloodVOS.get(bloodVOS.size() - 1).getTotalValue() < needVolume) {
-            return new ArrayList<Blood>();
+            return new ArrayList<>();
         } else {
-            List<Blood> bloodList = bloodConverter.bloodVOToblood(bloodVOS);
-            return bloodList;
+            return bloodConverter.bloodVOToblood(bloodVOS);
         }
+    }
 
+
+    @Override
+    public List<RankVO> getRankList() {
+        return bloodMapper.getRankList();
     }
 }
