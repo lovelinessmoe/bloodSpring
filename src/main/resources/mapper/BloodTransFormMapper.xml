@@ -18,4 +18,5 @@
     form_id, need_person, need_volume, need_blood_type, apply_user, apply_time, `state`, 
     trans_bloods_id
   </sql>
+
 </mapper>

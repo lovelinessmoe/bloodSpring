@@ -86,6 +86,7 @@ public class DoctorBloodController {
      * @return
      */
     @PostMapping("/applyList")
+    @ApiOperation(value = "医生查看自己的申请记录", notes = "无")
     public Result applyList() {
 
         String applyUserId = currentUserUtils.getCurrentUser().getUserId();

@@ -12,10 +12,14 @@
     trans_bloods_id, blood_id
   </sql>
 
-  <select id="lookbyblood" resultType="vip.ashes.blood.entity.TransBloods">
-    select blood_id
-    from trans_bloods a
-           inner join blood_trans_form b
-                      on a.trans_bloods_id = b.trans_bloods_id
+  <select id="lookbyblood" resultType="vip.ashes.blood.entity.Blood">
+
+    SELECT *
+    from blood
+    WHERE blood_id IN (
+      select blood_id
+      from trans_bloods a
+             inner join blood_trans_form b
+                        on a.trans_bloods_id = b.trans_bloods_id)
   </select>
 </mapper>
