@@ -154,6 +154,12 @@ public class BackBloodController {
         }
     }
 
+    /**
+     * 管理员查看全部申请单
+     * @param query
+     * @param bloodTransForm
+     * @return
+     */
     @PostMapping("/listAllForm")
     @ApiOperation(value = "管理员查看全部申请单", notes = "无")
     public Result listAllForm(PageDTO<BloodTransForm> query, BloodTransForm bloodTransForm) {

@@ -20,6 +20,10 @@ import java.util.List;
 public class RankController {
     private final BloodService bloodService;
 
+    /**
+     * 获取排行榜
+     * @return
+     */
     @GetMapping("/getRankList")
     @ApiOperation("获取排行榜")
     public Result getRankList() {
