@@ -9,6 +9,8 @@ import io.swagger.annotations.ApiParam;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import vip.ashes.blood.entity.Blood;
+import vip.ashes.blood.entity.BloodTransForm;
 import vip.ashes.blood.entity.User;
 import vip.ashes.blood.service.UserService;
 import vip.ashes.blood.utils.Result;
@@ -83,4 +85,7 @@ public class BackUserController {
         PageDTO<User> pages = userService.page(query, userQueryWrapper);
         return Result.ok().data(pages);
     }
+
+
+
 }

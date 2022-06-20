@@ -154,4 +154,14 @@ public class BackBloodController {
         }
     }
 
+    @PostMapping("/listAllForm")
+    @ApiOperation(value = "管理员查看全部申请单", notes = "无")
+    public Result listAllForm(PageDTO<BloodTransForm> query, BloodTransForm bloodTransForm) {
+
+        QueryWrapper<BloodTransForm> bloodQueryWrapper = new QueryWrapper<>(bloodTransForm);
+        PageDTO<BloodTransForm> pages = bloodTransFormService.page(query, bloodQueryWrapper);
+        return Result.ok().data(pages);
+
+    }
+
 }
