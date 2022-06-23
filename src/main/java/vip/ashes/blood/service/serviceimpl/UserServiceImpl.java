@@ -114,7 +114,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         mailVo.setTo(user.getEmail());
         mailVo.setSubject("Blood注册验证码");
         mailVo.setText("<div style=\"margin: 0 auto;width: 500px;text-align: center;\">\n" +
-                "        <h3>您好" + user.getUserName() + "，欢迎注册喵喵博客，您的邮箱刚刚在Blood注册，为了保护您的信息安全，我们来信进行邮箱验证，如果此操作不是由您发起的，请忽略此邮件。</h3>\n" +
+                "        <h3>您好" + user.getUserName() + "，欢迎注册血站平台，您的邮箱刚刚在Blood注册，为了保护您的信息安全，我们来信进行邮箱验证，如果此操作不是由您发起的，请忽略此邮件。</h3>\n" +
                 "        <h1>您的验证码为<span style=\"color: red;\">" + code + "</span></h1>\n" +
                 "</div>");
 
